@@ -1,5 +1,491 @@
-<html>
-  <body>
-    hello world
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="title" content="BeautyGRPO: Aesthetic Alignment for Face Retouching via Dynamic Path Guidance and Fine-Grained Preference Modeling">
+  <meta name="description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
+  <meta name="keywords" content="face retouching, aesthetic alignment, diffusion models, GRPO, reinforcement learning">
+  <meta name="author" content="Jiachen Yang, Xianhui Lin, Yi Dong, Zebiao Zheng, Xing Liu, Hong Gu, Yanmei Fang">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="vivo BlueImage Lab & Sun Yat-sen University">
+  <meta property="og:title" content="BeautyGRPO: Aesthetic Alignment for Face Retouching via Dynamic Path Guidance and Fine-Grained Preference Modeling">
+  <meta property="og:description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
+  <meta property="og:url" content="https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE">
+  <meta property="og:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="BeautyGRPO - Research Preview">
+  <meta property="article:published_time" content="2024-01-01T00:00:00.000Z">
+  <meta property="article:author" content="Jiachen Yang">
+  <meta property="article:section" content="Research">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@YOUR_TWITTER_HANDLE">
+  <meta name="twitter:creator" content="@AUTHOR_TWITTER_HANDLE">
+  <meta name="twitter:title" content="BeautyGRPO: Aesthetic Alignment for Face Retouching">
+  <meta name="twitter:description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
+  <meta name="twitter:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png">
+  <meta name="twitter:image:alt" content="BeautyGRPO - Research Preview">
+
+  <meta name="citation_title" content="BeautyGRPO: Aesthetic Alignment for Face Retouching via Dynamic Path Guidance and Fine-Grained Preference Modeling">
+  <meta name="citation_author" content="Yang, Jiachen">
+  <meta name="citation_author" content="Lin, Xianhui">
+  <meta name="citation_author" content="Dong, Yi">
+  <meta name="citation_author" content="Zheng, Zebiao">
+  <meta name="citation_author" content="Liu, Xing">
+  <meta name="citation_author" content="Gu, Hong">
+  <meta name="citation_author" content="Fang, Yanmei">
+  <meta name="citation_publication_date" content="2024">
+  <meta name="citation_conference_title" content="CVPR 2024">
+  <meta name="citation_pdf_url" content="https://YOUR_DOMAIN.com/static/pdfs/paper.pdf">
+  
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://documentcloud.adobe.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+  <title>BeautyGRPO: Aesthetic Alignment for Face Retouching | Academic Research</title>
+  
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link rel="apple-touch-icon" href="static/images/favicon.ico">
+  
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+
+  <style>
+    /* ================= 画廊缩略图样式 ================= */
+    .thumbnails-container {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap; /* 如果图片太多，会自动换行 */
+      margin-bottom: 25px;
+      padding: 10px;
+    }
+    .thumb-img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+      opacity: 0.5; /* 未选中状态半透明 */
+      transition: all 0.2s ease-in-out;
+      border: 3px solid transparent;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .thumb-img:hover {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+    .thumb-img.active {
+      opacity: 1; /* 选中状态全显 */
+      border-color: #3273dc; /* 蓝色高亮边框 */
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(50, 115, 220, 0.4);
+    }
+
+    /* ================= 底部主对比图样式 ================= */
+    .image-compare-container {
+      position: relative;
+      width: 100%;
+      max-width: 600px; /* 控制大图的最大宽度，不会撑满全屏 */
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      --position: 50%; 
+    }
+    .image-compare-container img {
+      display: block;
+      width: 100%;
+      height: auto;
+      user-select: none;
+      pointer-events: none;
+    }
+    .img-background { width: 100%; }
+    .img-foreground {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      clip-path: polygon(0 0, var(--position) 0, var(--position) 100%, 0 100%);
+    }
+    .compare-slider {
+      position: absolute;
+      -webkit-appearance: none; appearance: none;
+      width: 100%; height: 100%;
+      top: 0; left: 0;
+      background: transparent; outline: none; margin: 0;
+      cursor: ew-resize; z-index: 10;
+    }
+    .compare-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 40px; height: 100vh; background: transparent; cursor: ew-resize;
+    }
+    .compare-slider::-moz-range-thumb {
+      width: 40px; height: 100vh; background: transparent; cursor: ew-resize; border: none;
+    }
+    .slider-line {
+      position: absolute; top: 0; bottom: 0; left: var(--position);
+      width: 4px; background: white; transform: translateX(-50%);
+      pointer-events: none; z-index: 5; box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    }
+    .slider-button {
+      position: absolute; top: 50%; left: var(--position);
+      transform: translate(-50%, -50%); width: 40px; height: 40px;
+      background: white; border-radius: 50%;
+      display: flex; justify-content: center; align-items: center;
+      pointer-events: none; z-index: 6; box-shadow: 0 0 10px rgba(0,0,0,0.5); color: #333;
+    }
+    .compare-label {
+      position: absolute; bottom: 15px; padding: 6px 14px;
+      background: rgba(0,0,0,0.6); color: white; border-radius: 6px;
+      font-size: 14px; font-weight: 600; pointer-events: none; backdrop-filter: blur(4px);
+    }
+    .label-after { left: 15px; z-index: 4; } 
+    .label-before { right: 15px; z-index: 1; }
+  </style>
+</head>
+<body>
+
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <main id="main-content">
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            
+            <h1 class="title is-1 publication-title">BeautyGRPO: Aesthetic Alignment for Face Retouching via Dynamic Path Guidance and Fine-Grained Preference Modeling</h1>
+            
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="#" target="_blank">Jiachen Yang</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=wLTXeNwAAAAJ&hl=zh-CN&oi=ao" target="_blank">Xianhui Lin</a><sup>2&dagger;</sup>,
+              </span>
+              <span class="author-block">
+                <a href="#" target="_blank">Yi Dong</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="#" target="_blank">Zebiao Zheng</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="#" target="_blank">Xing Liu</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="#" target="_blank">Hong Gu</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=jI27z8MAAAAJ&hl=zh-CN&oi=sra" target="_blank">Yanmei Fang</a><sup>1,3*</sup>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors" style="margin-top: 15px;">
+              <span class="author-block" style="display: block;"><sup>1</sup>School of Cyber Science and Technology, Shenzhen Campus of Sun Yat-sen University, China</span>
+              <span class="author-block" style="display: block;"><sup>2</sup>vivo BlueImage Lab, vivo Mobile Communication Co., Ltd., China</span>
+              <span class="author-block" style="display: block;"><sup>3</sup>Guangdong Provincial Key Laboratory of Information Security Technology, China</span>
+              
+              <span class="eql-cntrb"><small><br><sup>&dagger;</sup>Project leader &nbsp;&nbsp;&nbsp; <sup>*</sup>Corresponding author</small></span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <span class="link-block">
+                  <a href="" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                  <span>Paper</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-database"></i></span>
+                  <span>Dataset</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-project-diagram"></i></span>
+                  <span>Model</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span>
+                  <span>Code</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="ai ai-arxiv"></i></span>
+                  <span>arXiv</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero is-small" style="padding-bottom: 2rem;">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        
+        <h2 class="title is-4 has-text-centered">BeautyGRPO employs online RL to boost realism and aesthetics in high-fidelity image editing through human preference alignment.</h2>
+
+        <div class="thumbnails-container">
+          <img src="static/images/3_input.png" class="thumb-img active" 
+               data-before="static/images/3_input.png" data-after="static/images/3_ours_out.png" alt="Sample 1">
+          
+          <img src="static/images/132_input.png" class="thumb-img" 
+               data-before="static/images/132_input.png" data-after="static/images/132_ours_out.png" alt="Sample 2">
+          
+          <img src="static/images/69023_input.png" class="thumb-img" 
+               data-before="static/images/69023_input.png" data-after="static/images/69023_ours_out.png" alt="Sample 3">
+          
+          <img src="static/images/29_input.png" class="thumb-img" 
+               data-before="static/images/29_input.png" data-after="static/images/29_ours_out.png" alt="Sample 4">
+          
+          <img src="static/images/44_input.png" class="thumb-img" 
+               data-before="static/images/44_input.png" data-after="static/images/44_ours_out.png" alt="Sample 5">
+          
+          <img src="static/images/131_input.png" class="thumb-img" 
+               data-before="static/images/131_input.png" data-after="static/images/131_ours_out.png" alt="Sample 6">
+          
+          <img src="static/images/155_input.png" class="thumb-img" 
+               data-before="static/images/155_input.png" data-after="static/images/155_ours_out.png" alt="Sample 7">
+    
+          <img src="static/images/69099_input.png" class="thumb-img" 
+               data-before="static/images/69099_input.png" data-after="static/images/69099_ours_out.png" alt="Sample 8">
+          </div>
+
+        <div class="columns is-centered">
+          <div class="column is-10"> <div class="image-compare-container" id="main-compare">
+              <img src="static/images/3_input.png" id="main-bg" class="img-background" alt="Input">
+              <img src="static/images/3_ours_out.png" id="main-fg" class="img-foreground" alt="Ours">
+              
+              <input type="range" min="0" max="100" value="50" class="compare-slider" id="main-slider"
+                     oninput="this.parentNode.style.setProperty('--position', this.value + '%');">
+              
+              <div class="slider-line"></div>
+              <div class="slider-button"><i class="fas fa-arrows-alt-h"></i></div>
+              <div class="compare-label label-after">Output</div>
+              <div class="compare-label label-before">Input</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-4">Abstract</h2>
+          <div class="content has-text-justified" style="font-size: 0.9rem;">
+            <p>
+              Face retouching requires removing subtle imperfections while preserving unique facial identity features, in order to enhance overall aesthetic appeal. However, existing methods suffer from a fundamental trade-off. Supervised learning on labeled data is constrained to pixel-level label mimicry, failing to capture complex subjective human aesthetic preferences. Conversely, while online reinforcement learning (RL) excels at preference alignment, its stochastic exploration paradigm conflicts with the high-fidelity demands of face retouching and often introduces noticeable noise artifacts due to accumulated stochastic drift. To address these limitations, we propose BeautyGRPO, a reinforcement learning framework that aligns face retouching with human aesthetic preferences. We construct FRPref-10K, a fine-grained preference dataset covering five key retouching dimensions, and train a specialized reward model capable of evaluating subtle perceptual differences. To reconcile exploration and fidelity, we introduce Dynamic Path Guidance (DPG). DPG stabilizes the stochastic sampling trajectory by dynamically computing an anchor-based ODE path and replanning a guided trajectory at each sampling timestep, effectively correcting stochastic drift while maintaining controlled exploration. Extensive experiments show that BeautyGRPO outperforms both specialized face retouching methods and general image editing models, achieving superior texture quality, more accurate blemish removal, and overall results that better align with human aesthetic preferences.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      
+      <h2 class="title is-4 has-text-centered" style="margin-bottom: 30px;">
+        Overview of FRPref-10K construction, reward model training, and BeautyGRPO with Dynamic Path Guidance (DPG)
+      </h2>
+      
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full">
+          <div style="width: 100%; max-width: 1000px; margin: 0 auto;">
+            <object data="static/images/fig2.svg" 
+                    type="image/svg+xml" 
+                    style="width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px; display: block;">
+            </object>
+          </div>
+          
+          <h2 class="subtitle has-text-centered is-size-6" style="margin-top: 15px;">
+             <b>Top:</b> FRPref-10K dataset curation pipeline. Multiple retouched candidates are generated with diverse editing models, preference pairs are formed via output-vs-output/label comparisons, and are annotated by VLMs across five quality dimensions before human verification.
+             <b>Bottom left:</b> Three-stage reward model training, including SFT, self-training with consistency filtering, and GRPO. 
+              <b>Bottom right:</b> BeautyGRPO training with DPG on a FluxKontext-LoRA backbone.
+          </h2>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      
+      <h2 class="title is-4 has-text-centered" style="margin-bottom: 30px;">
+        Dynamic Path Guidance (DPG) for Anchored Exploration
+      </h2>
+      
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full">
+          <div style="width: 100%; max-width: 1000px; margin: 0 auto;">
+            
+            <object data="static/images/3a.svg" 
+                    type="image/svg+xml" 
+                    style="width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px; display: block; margin-bottom: 20px;">
+            </object>
+
+            <object data="static/images/3b.svg" 
+                    type="image/svg+xml" 
+                    style="width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px; display: block; margin-bottom: 20px;">
+            </object>
+
+            <object data="static/images/3c.svg" 
+                    type="image/svg+xml" 
+                    style="width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px; display: block;">
+            </object>
+            
+          </div>
+          
+          <h2 class="subtitle has-text-centered is-size-6" style="margin-top: 20px;">
+            DPG mechanism dynamically replans trajectories at every step, effectively correcting stochastic drift and achieving a balance between exploration and fidelity.
+          </h2>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      
+      <h2 class="title is-4 has-text-centered" style="margin-bottom: 30px;">
+        Results
+      </h2>
+      
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full">
+          <div style="width: 100%; max-width: 1000px; margin: 0 auto;">
+            <object data="static/images/fig4.svg" 
+                    type="image/svg+xml" 
+                    style="width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px; display: block;">
+            </object>
+          </div>
+          
+          <h2 class="subtitle has-text-centered is-size-6" style="margin-top: 15px;">
+            BeautyGRPO effectively removes blemishes and dullness while naturally preserving skin texture, original pores, authentic radiance, and distinctive personal features such as moles. The resulting visual output is more translucent and sophisticated.
+          </h2>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="bibtex-header">
+        <h2 class="title is-4">BibTeX</h2>
+        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+          <i class="fas fa-copy"></i>
+          <span class="copy-text">Copy</span>
+        </button>
+      </div>
+      <pre id="bibtex-code"><code>@inproceedings{BeautyGRPO2026,
+  title={BeautyGRPO: Aesthetic Alignment for Face Retouching via Dynamic Path Guidance and Fine-Grained Preference Modeling},
+  author={Yang, Jiachen and Lin, Xianhui and Dong, Yi and Zheng, Zebiao and Liu, Xing and Gu, Hong and Fang, Yanmei},
+  journal={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year={2026}
+}</code></pre>
+    </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // 获取所有的缩略图和主大图的元素
+    const thumbnails = document.querySelectorAll('.thumb-img');
+    const mainBg = document.getElementById('main-bg');
+    const mainFg = document.getElementById('main-fg');
+    const mainSlider = document.getElementById('main-slider');
+    const mainCompare = document.getElementById('main-compare');
+
+    // 为每个缩略图绑定点击事件
+    thumbnails.forEach(thumb => {
+      thumb.addEventListener('click', function() {
+        // 1. 移除所有缩略图的选中状态
+        thumbnails.forEach(t => t.classList.remove('active'));
+        // 2. 为当前点击的缩略图加上选中状态
+        this.classList.add('active');
+
+        // 3. 替换下方大框里的图片路径
+        mainBg.src = this.getAttribute('data-before');
+        mainFg.src = this.getAttribute('data-after');
+
+        // 4. 重置中间的拖拽滑块到 50% 的位置，提升体验
+        mainSlider.value = 50;
+        mainCompare.style.setProperty('--position', '50%');
+      });
+    });
+  });
+</script>
+
+</body>
 </html>
